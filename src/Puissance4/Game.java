@@ -7,6 +7,7 @@ package Puissance4;
 
 import Puissance4.gui.GameWindow;
 import javax.swing.*;
+import java.util.Random;
 
 /**
  * @class Game
@@ -46,6 +47,17 @@ public class Game {
         this.currentPlayer = humanPlayer;
         this.gameWindow = gameWindow;
         this.isHumanVsHuman = isHumanVsHuman;
+
+        // Choisir aléatoirement le joueur qui commence.
+        Random random = new Random();
+        if (random.nextBoolean()) {
+            this.currentPlayer = humanPlayer;
+        } else {
+            this.currentPlayer = aiPlayer;
+            if (!isHumanVsHuman) {
+                SwingUtilities.invokeLater(() -> aiTurn());
+            }
+        }
     }
 
     /**
